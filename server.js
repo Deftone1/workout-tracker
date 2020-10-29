@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-const databaseUrl = "warmup";
+const databaseUrl = "workout";
 const collections = ["books"];
 
 const db = mongojs(databaseUrl, collections);

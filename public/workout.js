@@ -1,4 +1,5 @@
 async function initWorkout() {
+  console.log("public workout.js file")
   const lastWorkout = await API.getLastWorkout();
   console.log("Last workout:", lastWorkout);
   if (lastWorkout) {

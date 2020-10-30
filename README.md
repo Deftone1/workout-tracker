@@ -20,11 +20,11 @@ The workout tracker is an application that allows a user to keep track of variou
 
 ## Challenges
 
-This assignment was easily the most difficult of the class thus far - I had trouble understanding the functionality of MongoDB/Mongoose and did not fully get the app working perfectly. I tried using the Mongoose Virtual to connect the data needed for the total duration of the workout, but did not figure it out. 
+This assignment was easily the most difficult of the class thus far - I had some confusion with Mongoose and did not get the app working perfectly. I tried a Virtual to make the 'total duration' field work, but did not succeed. 
 
 ## Successes
 
-Further understanding of Javascript and backend technologies, and how the front end and back end talk with each other to send data and perform an operation. 
+Further understanding of Javascript and back end technology/functionality - how the front end and back end talk with each other to send data and perform an operation. 
 
 ## Screenshots of application: 
 

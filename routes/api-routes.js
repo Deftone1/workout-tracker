@@ -46,6 +46,7 @@ module.exports = function (app) {
                 res.json(error);
             });
 
+            // UPDATES workout by user input (ID)
         function updateWorkout(exercises) {
             Workout.findByIdAndUpdate(workoutId, { exercises: exercises }, function (error, doc) {
                 if (error) {

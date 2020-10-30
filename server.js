@@ -10,7 +10,8 @@ app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
-
+ 
+// Connecting to Mongoose
 mongoose.connect(
   process.env.MONGODB_URI || 'mongodb://localhost/deep-thoughts',
   {
@@ -21,6 +22,7 @@ mongoose.connect(
   }
 );
 
+// Required routes for API and HTML
 require("./routes/api-routes")(app);
 require("./routes/html-routes")(app);
 

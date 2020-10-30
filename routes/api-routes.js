@@ -1,42 +1,72 @@
 const Workout = require("../models/workout.js");
 
 module.exports = function (app) {
-    app.post("/api/workouts", function (req, res) {
-        var workout = new Workout(req.body)
+    
+    app.get("/api/workouts", (req, res) => {
+        Workout.find({})
+            .then(workout => {
+                res.json(workout);
+            })
+            .catch(error => {
+                res.json(error);
+            });
+    });
 
-        workout.save(err => {
-            if (err) return res.status(500).send(err);
-            return res.status(200).send(workout);
-        })
+    
+
+
+    // CREATES a new workout
+    app.post("/api/workouts", (req, res) => {
+        try {
+            const response = Workout.create({ type: "workout" })
+            res.json(response);
+        }
+        catch (error) {
+            console.log("Something went wrong!", error)
+        }
+
     })
 
-    app.get("/api/workouts", function (req, res) {
-        console.log("Test")
 
-        Workout.find({}).then(function (data, err) {
-            if (err) throw err
-            res.json(data)
-        })
+
+    //ADDS a new exercise to a workout, using the API (ID specific)
+    app.put("/api/workouts/:id", ({ body, params }, res) => {
+        const workoutId = params.id;
+        var savedWorkouts = [];
+
+      // GETS saved exercises
+        Workout.find({ _id: workoutId })
+            .then(dbWorkout => {
+                savedWorkouts = dbWorkout[0].exercises;
+                res.json(dbWorkout[0].exercises);
+                let allWorkouts = [...savedWorkouts, body]
+                updateWorkout(allWorkouts)
+            })
+            .catch(error => {
+                res.json(error);
+            });
+
+        function updateWorkout(exercises) {
+            Workout.findByIdAndUpdate(workoutId, { exercises: exercises }, function (error, doc) {
+                if (error) {
+                    console.log(error)
+                }
+
+            })
+        }
+
     })
 
-    // app.get("/api/workouts/:id", function (req, res) {
+    app.get("/api/workouts/range", (req, res) => {
+        Workout.find({})
+            .then(workout => {
+                res.json(workout);
+            })
+            .catch(err => {
+                res.json(error);
+            });
+    });
+};
 
-    //     .FINDONE GOES HERE
-    // })
 
-
-
-
-    app.put("/api/workouts/", function (req, res) {
-        var query = req.body
-        Workout.update({}, { sort: { name: 1 } }).then(function (data, err) {
-
-            console.log(data)
-            res.json(data)
-            if (err) throw err
-
-        })
-    })
-
-}
 
